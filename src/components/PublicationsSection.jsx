@@ -1,6 +1,9 @@
 import React, { useState, useId, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import bg1 from "../assets/image/bg1.jpg"
+import { Link } from "react-router-dom"
+import { ArrowRight } from "lucide-react"
+
 
 const useOutsideClick = (ref, callback) => {
   useEffect(() => {
@@ -225,7 +228,7 @@ const PublicationsSection = () => {
                       href={active.ctaLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="px-4 py-3 text-sm rounded-full font-bold bg-blue-600 text-white hover:bg-blue-700 transition-colors"
+                      className="px-4 py-3 text-sm rounded-full font-bold bg-green-800 text-white hover:bg-green-900 transition-colors whitespace-nowrap"
                     >
                       {active.ctaText}
                     </motion.a>
@@ -252,7 +255,7 @@ const PublicationsSection = () => {
               layoutId={`card-${card.title}-${id}`}
               key={`card-${card.title}-${id}`}
               onClick={() => setActive(card)}
-              className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-neutral-50 dark:hover:bg-neutral-800 rounded-xl cursor-pointer"
+              className="p-4 flex flex-col md:flex-row justify-between items-center hover:bg-green-50 dark:hover:bg-green-900/10 rounded-xl cursor-pointer transition-colors"
             >
               <div className="flex gap-4 flex-col md:flex-row">
                 <motion.div layoutId={`image-${card.title}-${id}`}>
@@ -265,7 +268,7 @@ const PublicationsSection = () => {
                 <div>
                   <motion.h3
                     layoutId={`title-${card.title}-${id}`}
-                    className="font-medium text-black dark:text-black text-center md:text-left"
+                    className="font-medium text-black text-center md:text-left"
                   >
                     {card.title}
                   </motion.h3>
@@ -279,13 +282,19 @@ const PublicationsSection = () => {
               </div>
               <motion.button
                 layoutId={`button-${card.title}-${id}`}
-                className="px-4 py-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-blue-600 hover:text-white text-black mt-4 md:mt-0 transition-colors"
+                className="px-4 py-2 text-sm rounded-full font-bold bg-gray-100 hover:bg-green-800 hover:text-white text-black mt-4 md:mt-0 transition-colors whitespace-nowrap "
               >
                 {card.ctaText}
               </motion.button>
             </motion.div>
           ))}
         </ul>
+        <div className="mt-16">
+          <Link to="/publications" className="inline-flex items-center text-lg font-medium group hover:text-green-900">
+            View All Publications
+            <ArrowRight className="w-5 h-5 ml-2 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </div>
       </div>
     </div>
   )
