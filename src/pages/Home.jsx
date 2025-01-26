@@ -1,6 +1,4 @@
 import React from "react"
-import Navbar from "../components/Navbar"
-import Footer from "../components/Footer"
 import Slideshow from "../components/Slideshow"
 import EventsSection from "../components/EventsSection"
 import PublicationsSection from "../components/PublicationsSection"
@@ -15,12 +13,10 @@ const Home = () => {
 
   return (
     <div className="min-h-screen">
-      <Navbar />
       <Slideshow images={images} />
       <EventsSection />
       <PublicationsSection bg1={bg1} bg2={bg2} bg3={bg3} />
       <TestimonialsSection/>
-      <Footer />
     </div>
   )
 }

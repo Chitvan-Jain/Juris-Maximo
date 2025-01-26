@@ -89,7 +89,7 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-black shadow-md w-full">
       <div className="flex items-center mx-10 h-20 justify-between">
         <div className="flex items-center">
-          <img src={JurisMaximo} className="w-8 h-auto mr-3" alt="Juris Maximo Logo" />
+          <img src={JurisMaximo} className="w-20 h-auto mr-3" alt="Juris Maximo Logo" />
           <span className="text-black font-bold text-2xl">Juris Maximo</span>
         </div>
 
