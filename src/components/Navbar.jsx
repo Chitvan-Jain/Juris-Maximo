@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
-import JurisLogo from "../assets/image/Juris_logo.png"
 import { ChevronDown } from "lucide-react"
+import JurisMaximo from "../assets/image/Juris_logo.png"
 
 const Navbar = () => {
   const [activeDropdown, setActiveDropdown] = useState(null)
@@ -9,8 +9,8 @@ const Navbar = () => {
   const NavLink = ({ to, children, dropdown }) => (
     <div
       className="relative group"
-      onMouseEnter={() => setActiveDropdown(dropdown)}
-      onMouseLeave={() => setActiveDropdown(null)}
+      onMouseEnter={() => dropdown && setActiveDropdown(dropdown)}
+      onMouseLeave={() => dropdown && setActiveDropdown(null)}
     >
       <Link
         to={to}
@@ -20,6 +20,15 @@ const Navbar = () => {
         {dropdown && <ChevronDown className="ml-1 h-4 w-4" />}
         <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-900 transition-all duration-300 group-hover:w-full"></span>
       </Link>
+      {dropdown && (
+        <DropdownMenu isActive={activeDropdown === dropdown}>
+          {dropdowns[dropdown].items.map((item, index) => (
+            <DropdownItem key={index} to={item.to}>
+              {item.label}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      )}
     </div>
   )
 
@@ -28,6 +37,8 @@ const Navbar = () => {
       className={`absolute top-full left-0 w-64 bg-white shadow-lg transition-all duration-200 ${
         isActive ? "opacity-100 visible translate-y-0" : "opacity-0 invisible -translate-y-2"
       }`}
+      onMouseEnter={() => setActiveDropdown(activeDropdown)}
+      onMouseLeave={() => setActiveDropdown(null)}
     >
       <div className="py-2">{children}</div>
     </div>
@@ -78,83 +89,26 @@ const Navbar = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white border-black shadow-md w-full">
       <div className="flex items-center mx-10 h-20 justify-between">
         <div className="flex items-center">
-          <img src={JurisLogo || "/placeholder.svg"} className="w-8 h-auto mr-3" alt="Juris Maximo Logo" />
+          <img src={JurisMaximo} className="w-8 h-auto mr-3" alt="Juris Maximo Logo" />
           <span className="text-black font-bold text-2xl">Juris Maximo</span>
         </div>
 
         <div className="hidden md:flex items-center space-x-4">
           <NavLink to="/">Home</NavLink>
           <NavLink to="/team">Team</NavLink>
-
-          <div
-            className="relative group"
-            onMouseEnter={() => setActiveDropdown("publications")}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink to="#" dropdown="publications">
-              Publications
-            </NavLink>
-            <DropdownMenu isActive={activeDropdown === "publications"}>
-              {dropdowns.publications.items.map((item, index) => (
-                <DropdownItem key={index} to={item.to}>
-                  {item.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </div>
-
-          <div
-            className="relative group"
-            onMouseEnter={() => setActiveDropdown("events")}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink to="#" dropdown="events">
-              Events
-            </NavLink>
-            <DropdownMenu isActive={activeDropdown === "events"}>
-              {dropdowns.events.items.map((item, index) => (
-                <DropdownItem key={index} to={item.to}>
-                  {item.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </div>
-
+          <NavLink to="#" dropdown="publications">
+            Publications
+          </NavLink>
+          <NavLink to="#" dropdown="events">
+            Events
+          </NavLink>
           <NavLink to="/legal-news">Legal News</NavLink>
-
-          <div
-            className="relative group"
-            onMouseEnter={() => setActiveDropdown("opportunities")}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink to="#" dropdown="opportunities">
-              Opportunities
-            </NavLink>
-            <DropdownMenu isActive={activeDropdown === "opportunities"}>
-              {dropdowns.opportunities.items.map((item, index) => (
-                <DropdownItem key={index} to={item.to}>
-                  {item.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </div>
-
-          <div
-            className="relative group"
-            onMouseEnter={() => setActiveDropdown("career")}
-            onMouseLeave={() => setActiveDropdown(null)}
-          >
-            <NavLink to="#" dropdown="career">
-              Career
-            </NavLink>
-            <DropdownMenu isActive={activeDropdown === "career"}>
-              {dropdowns.career.items.map((item, index) => (
-                <DropdownItem key={index} to={item.to}>
-                  {item.label}
-                </DropdownItem>
-              ))}
-            </DropdownMenu>
-          </div>
+          <NavLink to="#" dropdown="opportunities">
+            Opportunities
+          </NavLink>
+          <NavLink to="#" dropdown="career">
+            Career
+          </NavLink>
         </div>
 
         <div className="flex">
